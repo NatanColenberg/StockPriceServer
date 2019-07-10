@@ -3,7 +3,7 @@ var request = require('request');
 var app = express();
 const port = 3001
 
-app.get('/', (req, res) => {
+app.get('/StockPrice/', (req, res) => {
 
     request(`https://finance.yahoo.com/quote/${req.query.symbol}/`, function(err, htmlRes, body){
 
@@ -25,6 +25,11 @@ app.get('/', (req, res) => {
         res.statusCode = 200;
         res.send({'price': price});
     });
+});
+
+app.get('/', (req, res) => {
+    res.statusCode = 200;
+    res.send('Hello From Stock Price Server!');
 });
 
 app.listen(port, function () {
