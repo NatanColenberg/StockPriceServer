@@ -17,6 +17,7 @@ app.get('/StockPrice/', (req, res) => {
         if(body.includes("currentPrice") == false){
             console.error(`Could not resolve Stock Symbol = '${req.query.symbol}'`);
             res.sendStatus(400);
+            res.header('Access-Control-Allow-Origin', '*');
             return;
         }
         
