@@ -1,10 +1,19 @@
 var express = require('express');
 var request = require('request');
-var app = express();
-const port = 3001
 
+var app = express();
+const port = 3001;
+
+// Get Web Application from root path or 'Home'
+app.get('/', '/Home', (req, res) => {
+    res.statusCode = 200;
+    res.send('Hello From Stock Price Server!');
+});
+
+// Handle Stock Price requests
 app.get('/StockPrice/', (req, res) => {
 
+    // Get the Stock Price from Yahoo Finance 
     request(`https://finance.yahoo.com/quote/${req.query.symbol}/`, function(err, htmlRes, body){
 
         if (err) {
@@ -28,11 +37,7 @@ app.get('/StockPrice/', (req, res) => {
     });
 });
 
-app.get('/', (req, res) => {
-    res.statusCode = 200;
-    res.send('Hello From Stock Price Server!');
-});
-
+// Start Listening on the selected port
 app.listen(port, function () {
   console.log(`Example app listening on port ${port}!`);
 });
